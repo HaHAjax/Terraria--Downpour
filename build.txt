@@ -1,0 +1,5 @@
+displayName = Terraria: Downpour
+author = HaHAjax
+version = 0.0.0.1
+buildIgnore = Luminance.dll; Luminance.pdb; Luminance.xml
+modReferences = Luminance

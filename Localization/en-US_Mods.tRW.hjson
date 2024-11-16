@@ -1,0 +1,13 @@
+NPCs: {
+	BugFly.DisplayName: Fly
+	FlySwarm.DisplayName: Fly Swarm
+	FireFlySwarm.DisplayName: Firefly Swarm
+	BigFireFlySwarm.DisplayName: Big Firefly Swarm
+	BigFlySwarm.DisplayName: Big Fly Swarm
+	MedBigFlySwarm.DisplayName: Medium Fly Swarm
+	MedFireFlySwarm.DisplayName: Medium Firefly Swarm
+	SmolBigFlySwarm.DisplayName: Smol Fly Swarm
+	SmolFireFlySwarm.DisplayName: Smol Firefly Swarm
+	MedFlySwarm.DisplayName: Medium Fly Swarm
+	SmolFlySwarm.DisplayName: Smol Fly Swarm
+}
