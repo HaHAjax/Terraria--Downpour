@@ -48,20 +48,23 @@ public class BigFireFlySwarm : ModNPC
 
     public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
     {
-        for (int i = 0; i < fireFlies.Length; i++)
+        if (fireFlies != null)
         {
-            // Update the drawing for the flies
-            Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/FireFly", AssetRequestMode.ImmediateLoad).Value;
-
-            Vector2 drawOrigin = baseTexture.Size() / 2;
-            for (int k = 0; k < fireFlies[i].oldPositions.Length; k++)
+            for (int i = 0; i < fireFlies.Length; i++)
             {
-                // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the fireflies look much smoother!!!!
-                Vector2 drawPos = fireFlies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                Color color = new(255, 255, 0, 255);
-                Vector2 scale = new((fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
-                float rotation = (fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).ToRotation();
-                Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
+                // Update the drawing for the flies
+                Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/FireFly", AssetRequestMode.ImmediateLoad).Value;
+
+                Vector2 drawOrigin = baseTexture.Size() / 2;
+                for (int k = 0; k < fireFlies[i].oldPositions.Length; k++)
+                {
+                    // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the fireflies look much smoother!!!!
+                    Vector2 drawPos = fireFlies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
+                    Color color = new(255, 255, 0, 255);
+                    Vector2 scale = new((fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
+                    float rotation = (fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).ToRotation();
+                    Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
+                }
             }
         }
 
