@@ -12,8 +12,8 @@ public class MedFlySwarm : ModNPC
 {
     public override string Texture => "tRW/Assets/NPCs/FlySwarm";
 
-    private readonly int maxFlies = 60;
-    private readonly Fly[] flies = new Fly[60];
+    private int maxFlies = 60;
+    private Fly[] flies = new Fly[60];
 
     public override void SetDefaults()
     {
@@ -43,32 +43,6 @@ public class MedFlySwarm : ModNPC
         }
 
         //return base.SpawnChance(spawnInfo);
-    }
-
-    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-    {
-        if (flies != null)
-        {
-            for (int i = 0; i < flies.Length; i++)
-            {
-                // Update the drawing for the flies
-                Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/Fly", AssetRequestMode.ImmediateLoad).Value;
-
-                Vector2 drawOrigin = baseTexture.Size() / 2;
-                for (int k = 0; k < flies[i].oldPositions.Length; k++)
-                {
-                    // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the flies look much smoother!!!!
-                    Vector2 drawPos = flies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                    Color color = new(0, 0, 0, 255);
-                    Vector2 scale = new((flies[i].flyPosition - flies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
-                    float rotation = (flies[i].flyPosition - flies[i].oldPositions[k]).ToRotation();
-                    Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
-                }
-            }
-        }
-
-        return true;
-        //return base.PreDraw(spriteBatch, screenPos, drawColor);
     }
 
     public int Timer
@@ -131,5 +105,36 @@ public class MedFlySwarm : ModNPC
         }
 
         //base.AI();
+    }
+
+    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        for (int i = 0; i < maxFlies; i++)
+        {
+            if (flies[i] == null)
+            {
+                flies[i] = new Fly();
+            }
+            else
+            {
+                // Update the drawing for the flies
+                Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/Fly", AssetRequestMode.ImmediateLoad).Value;
+
+                Vector2 drawOrigin = baseTexture.Size() / 2;
+                for (int k = 0; k < flies[i].oldPositions.Length; k++)
+                {
+                    // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the flies look much smoother!!!!
+                    Vector2 drawPos = flies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
+                    Color color = new(0, 0, 0, 255);
+                    Vector2 scale = new((flies[i].flyPosition - flies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
+                    float rotation = (flies[i].flyPosition - flies[i].oldPositions[k]).ToRotation();
+                    Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
+                }
+            }
+
+        }
+
+        return true;
+        //return base.PreDraw(spriteBatch, screenPos, drawColor);
     }
 }

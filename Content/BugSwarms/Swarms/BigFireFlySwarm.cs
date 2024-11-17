@@ -12,8 +12,8 @@ public class BigFireFlySwarm : ModNPC
 {
     public override string Texture => "tRW/Assets/NPCs/FlySwarm";
 
-    private readonly int maxFireFlies = 30;
-    private readonly FireFly[] fireFlies = new FireFly[30];
+    private int maxFireFlies = 30;
+    private FireFly[] fireFlies = new FireFly[30];
 
     public override void SetDefaults()
     {
@@ -45,33 +45,6 @@ public class BigFireFlySwarm : ModNPC
 
         //return base.SpawnChance(spawnInfo);
     }
-
-    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-    {
-        if (fireFlies != null)
-        {
-            for (int i = 0; i < fireFlies.Length; i++)
-            {
-                // Update the drawing for the flies
-                Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/FireFly", AssetRequestMode.ImmediateLoad).Value;
-
-                Vector2 drawOrigin = baseTexture.Size() / 2;
-                for (int k = 0; k < fireFlies[i].oldPositions.Length; k++)
-                {
-                    // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the fireflies look much smoother!!!!
-                    Vector2 drawPos = fireFlies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                    Color color = new(255, 255, 0, 255);
-                    Vector2 scale = new((fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
-                    float rotation = (fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).ToRotation();
-                    Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
-                }
-            }
-        }
-
-        return true;
-        //return base.PreDraw(spriteBatch, screenPos, drawColor);
-    }
-
     public int Timer
     {
         get => (int)NPC.ai[1];
@@ -79,6 +52,7 @@ public class BigFireFlySwarm : ModNPC
     }
 
     public override void AI()
+
     {
         Timer++;
 
@@ -112,5 +86,34 @@ public class BigFireFlySwarm : ModNPC
         }
 
         //base.AI();
+    }
+
+    public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+    {
+        for (int i = 0; i < maxFireFlies; i++)
+        {
+            if (fireFlies[i] == null)
+            {
+                fireFlies[i] = new FireFly();
+            }
+            else
+            {
+                // Update the drawing for the flies
+                Texture2D baseTexture = ModContent.Request<Texture2D>("tRW/Assets/NPCs/FireFly", AssetRequestMode.ImmediateLoad).Value;
+
+                Vector2 drawOrigin = baseTexture.Size() / 2;
+                for (int k = 0; k < fireFlies[i].oldPositions.Length; k++)
+                {
+                    // Shoutout to jioumu (IronTristonia) on the tModLoader Discord for making the fireflies look much smoother!!!!
+                    Vector2 drawPos = fireFlies[i].oldPositions[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
+                    Color color = new(255, 255, 0, 255);
+                    Vector2 scale = new((fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).Length() / baseTexture.Width, 0.225f);
+                    float rotation = (fireFlies[i].flyPosition - fireFlies[i].oldPositions[k]).ToRotation();
+                    Main.EntitySpriteDraw(baseTexture, drawPos, null, color, rotation, drawOrigin, scale, SpriteEffects.None, 0);
+                }
+            }        }
+
+        return true;
+        //return base.PreDraw(spriteBatch, screenPos, drawColor);
     }
 }
