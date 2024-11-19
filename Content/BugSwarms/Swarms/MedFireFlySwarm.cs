@@ -32,19 +32,19 @@ public class MedFireFlySwarm : ModNPC
         //base.SetDefaults();
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (!Main.dayTime && (spawnInfo.Player.ZoneForest || spawnInfo.Player.ZoneNormalCaverns || spawnInfo.Player.ZoneGemCave))
-        {
-            return SpawnCondition.Overworld.Chance * 0.1f;
-        }
-        else
-        {
-            return 0f;
-        }
+    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    //{
+    //    if (!Main.dayTime && (spawnInfo.Player.ZoneForest || spawnInfo.Player.ZoneNormalCaverns || spawnInfo.Player.ZoneGemCave))
+    //    {
+    //        return SpawnCondition.Overworld.Chance * 0.1f;
+    //    }
+    //    else
+    //    {
+    //        return 0f;
+    //    }
 
-        //return base.SpawnChance(spawnInfo);
-    }
+    //    //return base.SpawnChance(spawnInfo);
+    //}
 
     public override bool? CanFallThroughPlatforms()
     {

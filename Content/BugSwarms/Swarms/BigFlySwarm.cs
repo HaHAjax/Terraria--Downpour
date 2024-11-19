@@ -32,25 +32,25 @@ public class BigFlySwarm : ModNPC
         //base.SetDefaults();
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (Main.dayTime && spawnInfo.Player.ZoneForest)
-        {
-            return SpawnCondition.Overworld.Chance * 0.1f;
-        }
-        else
-        {
-            return 0f;
-        }
+    //public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    //{
+    //    if (Main.dayTime && spawnInfo.Player.ZoneForest)
+    //    {
+    //        return SpawnCondition.Overworld.Chance * 0.1f;
+    //    }
+    //    else
+    //    {
+    //        return 0f;
+    //    }
 
 
-        //return base.SpawnChance(spawnInfo);
-    }
+    //    //return base.SpawnChance(spawnInfo);
+    //}
 
-    public override void OnSpawn(IEntitySource source)
-    {
-        NPC.position.Y += 32; // Spawns two blocks above the ground
-    }
+    //public override void OnSpawn(IEntitySource source)
+    //{
+    //    NPC.position.Y += 32; // Spawns two blocks above the ground
+    //}
 
     public int Timer
     {
