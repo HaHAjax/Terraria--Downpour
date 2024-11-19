@@ -10,4 +10,6 @@ NPCs: {
 	SmolFireFlySwarm.DisplayName: Smol Firefly Swarm
 	MedFlySwarm.DisplayName: Medium Fly Swarm
 	SmolFlySwarm.DisplayName: Smol Fly Swarm
+	CoolEffect.DisplayName: Cool Effect
+	CoolEffectSwarm.DisplayName: Cool Effect Swarm
 }
