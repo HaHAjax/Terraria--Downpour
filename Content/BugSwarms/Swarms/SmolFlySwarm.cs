@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 using tRW.Content.BugSwarms.Bugs;
@@ -45,6 +46,11 @@ public class SmolFlySwarm : ModNPC
         //return base.SpawnChance(spawnInfo);
     }
 
+    public override void OnSpawn(IEntitySource source)
+    {
+        NPC.position.Y += 32; // Spawns two blocks above the ground
+    }
+
     public int Timer
     {
         get => (int)NPC.ai[1];
@@ -54,26 +60,6 @@ public class SmolFlySwarm : ModNPC
     public override void AI()
     {
         Timer++;
-
-        // Previous implementation
-        //if (flies == null)
-        //{
-        //    for (int i = 0; i < maxFlies; i++)
-        //    {
-        //        flies[i].SetInitials(NPC.position);
-        //    }
-        //}
-        //else
-        //{
-        //    for (int i = 0; i < flies.Length; i++)
-        //    {
-        //        flies[i].Update(!Collision.CanHitLine(flies[i].flyPosition, 1, 1, flies[i].heading.ToRotationVector2() * 4 * 16, 16, 16), Timer);
-        //        flies[i].UpdatePosition();
-        //    }
-        //}
-        // End previous implementation
-
-        //for (int i = 0; i < flies.Length; i++) flies[i] = new Fly();
 
         //Vector2 fliesPosition; // For debugging
         //Vector2 fliesVelocity; // For debugging

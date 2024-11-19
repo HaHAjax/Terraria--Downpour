@@ -49,9 +49,7 @@ public class BigFlySwarm : ModNPC
 
     public override void OnSpawn(IEntitySource source)
     {
-
-
-        base.OnSpawn(source);
+        NPC.position.Y += 32; // Spawns two blocks above the ground
     }
 
     public int Timer
